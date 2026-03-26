@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 15px 0;
+        }
+
+        .gender {
+            margin-bottom: 15px;
+        }
+
+        .gender input {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .buttons {
+            text-align: center;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+
+<script>
+function validateForm() {
+
+    let fullName = document.getElementById("fullname").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let terms = document.getElementById("terms");
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false;
+    }
+
+    if (!terms.checked) {
+        alert("You must agree to Terms & Conditions!");
+        return false;
+    }
+
+    // ✅ Save name in browser
+    localStorage.setItem("quizUser", fullName);
+
+    alert("Registration Successful!");
+
+    // ✅ Redirect to homepage
+    window.location.href = "doctype.html";
+
+    return false;
+}
+</script>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Registration Form</h2>
+
+    <form onsubmit="return validateForm()">
+
+        <!-- 1. Full Name -->
+        <label>Full Name</label>
+        <input type="text" id="fullname" required>
+
+        <!-- 2. Email -->
+        <label>Email Address</label>
+        <input type="email" required>
+
+        <!-- 3. Password -->
+        <label>Password</label>
+        <input type="password" id="password" required>
+
+        <!-- 4. Confirm Password -->
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" required>
+
+        <!-- 5. Gender -->
+        <label>Gender</label>
+        <div class="gender">
+            <input type="radio" name="gender" required> Male
+            <input type="radio" name="gender"> Female
+            <input type="radio" name="gender"> Other
+        </div>
+
+        <!-- 6. Date of Birth -->
+        <label>Date of Birth</label>
+        <input type="date" required>
+
+        <!-- 7. Phone Number -->
+        <label>Phone Number</label>
+        <input type="number" required>
+
+        <!-- 8. Address -->
+        <label>Address</label>
+        <textarea rows="3" required></textarea>
+
+        <!-- 9. State (Combo Box) -->
+        <label>State</label>
+        <input list="states" required>
+        <datalist id="states">
+            <option value="Andhra Pradesh">
+            <option value="Telangana">
+            <option value="Tamil Nadu">
+            <option value="Karnataka">
+            <option value="Maharashtra">
+        </datalist>
+
+        <!-- 10. Country -->
+        <label>Country</label>
+        <select required>
+            <option value="">--Select Country--</option>
+            <option>India</option>
+            <option>USA</option>
+            <option>UK</option>
+            <option>Canada</option>
+        </select>
+
+        <!-- 11. Upload Profile Picture -->
+        <label>Upload Profile Picture</label>
+        <input type="file" accept="image/*" required>
+
+        <!-- 12. Terms & Conditions -->
+        <input type="checkbox" id="terms"> I agree to the Terms & Conditions
+
+        <br><br>
+
+        <!-- Submit & Reset -->
+        <div class="buttons">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
